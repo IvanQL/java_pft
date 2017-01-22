@@ -14,4 +14,8 @@ public class Point {
     this.y =y;
   }
 
+  public  double distance (Point p2) {  // в этом случае не указывая параметр метод работать не будет?
+    return Math.sqrt((this.x-p2.x)*(this.x-p2.x)+(this.y-p2.y)*(this.y-p2.y));
+  }
+
   }
