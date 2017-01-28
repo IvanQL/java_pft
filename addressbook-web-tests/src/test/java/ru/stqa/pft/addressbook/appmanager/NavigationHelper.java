@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(FirefoxDriver wd) {
-    super(wd);
+    super ( wd );
   }
 
   public void gotoGroupPage() {
@@ -17,6 +17,6 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoAddContactPage() {
-    wd.findElement ( By.linkText ( "add new" ) ).click ();
+    click ( By.linkText ( "add new" ) );
   }
 }
