@@ -81,4 +81,27 @@ public class TestBase {
   protected void selectGroup() {
       wd.findElement( By.name("selected[]")).click();
   }
+
+  protected void enterNewContact() {
+    wd.findElement ( By.xpath ( "//div[@id='content']/form/input[21]" ) ).click ();
+  }
+
+  protected void fillContactForm(ContactData contactData) {
+    wd.findElement ( By.name ( "firstname" ) ).click ();
+    wd.findElement ( By.name ( "firstname" ) ).clear ();
+    wd.findElement ( By.name ( "firstname" ) ).sendKeys ( contactData.getName () );
+    wd.findElement ( By.name ( "lastname" ) ).click ();
+    wd.findElement ( By.name ( "lastname" ) ).clear ();
+    wd.findElement ( By.name ( "lastname" ) ).sendKeys ( contactData.getLastname () );
+    wd.findElement ( By.name ( "home" ) ).click ();
+    wd.findElement ( By.name ( "home" ) ).clear ();
+    wd.findElement ( By.name ( "home" ) ).sendKeys ( contactData.getTelephone () );
+    wd.findElement ( By.name ( "email" ) ).click ();
+    wd.findElement ( By.name ( "email" ) ).clear ();
+    wd.findElement ( By.name ( "email" ) ).sendKeys ( contactData.getEmail () );
+  }
+
+  protected void gotoAddContactPage() {
+    wd.findElement ( By.linkText ( "add new" ) ).click ();
+  }
 }
