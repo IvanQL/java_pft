@@ -19,18 +19,19 @@ public class ContactCreationTests extends TestBase {
       app.getGroupHelper ().createGroup ( new GroupData ( "test1", null, null ) );
     }
     app.getNavigationHelper ().gotoHomePage ();
-    List<ContactData> before = app.getContactHelper ().getContactList();
+    List <ContactData> before = app.getContactHelper ().getContactList ();
     app.getNavigationHelper ().gotoAddContactPage ();
-    ContactData contact = new ContactData ("ivan1", "bondar", "0981234567", "test@mail.com", "test1"  );
+    ContactData contact = new ContactData ( "ivan1", "bondar", "0981234567", "test@mail.com", "test1" );
     app.getContactHelper ().createContact ( contact, true );
     app.getNavigationHelper ().gotoHomePage ();
-    List<ContactData> after = app.getContactHelper ().getContactList();
-    Assert.assertEquals (after.size (), before.size () + 1);
+    List <ContactData> after = app.getContactHelper ().getContactList ();
+    Assert.assertEquals ( after.size (), before.size () + 1 );
 
-
-    contact.setId ( after.stream ().max ( Comparator.comparingInt ( ContactData::getId ) ).get ().getId () );
     before.add ( contact );
-    Assert.assertEquals ( new HashSet<Object> ( before ), new HashSet <Object> ( after ) );
+    Comparator <? super ContactData> byId = Comparator.comparingInt ( ContactData::getId );
+    before.sort ( byId );
+    after.sort ( byId );
+
 
   }
 

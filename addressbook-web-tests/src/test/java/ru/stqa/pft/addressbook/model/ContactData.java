@@ -3,13 +3,12 @@ package ru.stqa.pft.addressbook.model;
 public class ContactData {
 
 
-  private  int id;
+  private int id;
   private final String name;
   private final String lastname;
   private final String telephone;
   private final String email;
   private String group;
-
 
 
   public ContactData(int id, String name, String lastname, String telephone, String email, String group) {
@@ -21,8 +20,9 @@ public class ContactData {
     this.group = group;
   }
 
-  public ContactData( String name, String lastname, String telephone, String email, String group) {
-    this.id = 0;
+
+  public ContactData(String name, String lastname, String telephone, String email, String group) {
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.lastname = lastname;
     this.telephone = telephone;
@@ -55,6 +55,10 @@ public class ContactData {
   }
 
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -62,15 +66,13 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
-    if (id != that.id) return false;
     if (name != null ? !name.equals ( that.name ) : that.name != null) return false;
     return lastname != null ? lastname.equals ( that.lastname ) : that.lastname == null;
   }
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (name != null ? name.hashCode () : 0);
+    int result = name != null ? name.hashCode () : 0;
     result = 31 * result + (lastname != null ? lastname.hashCode () : 0);
     return result;
   }
@@ -82,9 +84,5 @@ public class ContactData {
             ", name='" + name + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 }
