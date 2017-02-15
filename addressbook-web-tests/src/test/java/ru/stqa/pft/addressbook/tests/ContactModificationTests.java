@@ -18,12 +18,12 @@ public class ContactModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.getContactHelper ().gotoHomePage ();
     if (!app.getContactHelper ().isThereAContact ()) {
-      app.getNavigationHelper ().gotoGroupPage ();
-      if (!app.getGroupHelper ().isThereAGroup ()) {
+      app.goTo ().groupPage ();
+      if (!app.group ().isThereAGroup ()) {
 
-        app.getGroupHelper ().createGroup ( new GroupData ( "test1", null, null ) );
+        app.group ().create ( new GroupData ( "test1", null, null ) );
       }
-      app.getNavigationHelper ().gotoAddContactPage ();
+      app.goTo ().gotoAddContactPage ();
       app.getContactHelper ().createContact ( new ContactData ( "ivan", "bondar", "0981234567", "test@mail.com", "test1" ), true );
       app.getContactHelper ().gotoHomePage ();
     }
