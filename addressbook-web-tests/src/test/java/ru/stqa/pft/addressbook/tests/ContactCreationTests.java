@@ -17,18 +17,18 @@ public class ContactCreationTests extends TestBase {
     if (!app.group ().isThereAGroup ()) {
       app.group ().create ( new GroupData ( "test1", null, null ) );
     }
-    app.getContactHelper ().gotoHomePage ();
+    app.contact ().homePage ();
 
   }
 
   @Test
   public void testContactCreation() {
-    List <ContactData> before = app.getContactHelper ().getContactList ();
-    app.goTo ().gotoAddContactPage ();
+    List <ContactData> before = app.contact ().list ();
+    app.goTo ().addContactPage ();
     ContactData contact = new ContactData ( "ivan1", "bondar", "0981234567", "test@mail.com", "test1" );
-    app.getContactHelper ().createContact ( contact, true );
-    app.getContactHelper ().gotoHomePage ();
-    List <ContactData> after = app.getContactHelper ().getContactList ();
+    app.contact ().create ( contact, true );
+    app.contact ().homePage ();
+    List <ContactData> after = app.contact ().list ();
     Assert.assertEquals ( after.size (), before.size () + 1 );
 
     before.add ( contact );

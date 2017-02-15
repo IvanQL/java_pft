@@ -25,7 +25,7 @@ public class NavigationHelper extends HelperBase {
 
   }
 
-  public void gotoAddContactPage() {
+  public void addContactPage() {
 
     if (isElementPresent ( By.tagName ( "h1" ) )
             && wd.findElement ( By.tagName ( "h1" ) ).getText ().equals ( "Edit / add address book entry" )
