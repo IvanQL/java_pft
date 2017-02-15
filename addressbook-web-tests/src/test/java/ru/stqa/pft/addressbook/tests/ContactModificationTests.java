@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -13,10 +14,9 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
-  @Test (enabled = false)
-  public void testContactModification() {
-
-    app.getNavigationHelper ().gotoHomePage ();
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.getContactHelper ().gotoHomePage ();
     if (!app.getContactHelper ().isThereAContact ()) {
       app.getNavigationHelper ().gotoGroupPage ();
       if (!app.getGroupHelper ().isThereAGroup ()) {
@@ -25,15 +25,16 @@ public class ContactModificationTests extends TestBase {
       }
       app.getNavigationHelper ().gotoAddContactPage ();
       app.getContactHelper ().createContact ( new ContactData ( "ivan", "bondar", "0981234567", "test@mail.com", "test1" ), true );
-      app.getNavigationHelper ().gotoHomePage ();
+      app.getContactHelper ().gotoHomePage ();
     }
-    app.getNavigationHelper ().gotoHomePage ();
+    app.getContactHelper ().gotoHomePage ();
+  }
+
+  @Test
+  public void testContactModification() {
     List<ContactData> before = app.getContactHelper ().getContactList();
-    app.getContactHelper ().initContactModification (before.size () - 1);
     ContactData contact = new ContactData ( before.get ( before.size () - 1).getId (),"ivan", "bondar", "0981234567", "test@mail.com", null );
-    app.getContactHelper ().fillContactForm ( contact, false );
-    app.getContactHelper ().submitContactModification ();
-    app.getNavigationHelper ().gotoHomePage ();
+    app.getContactHelper ().modifyContact ( before, contact );
     List<ContactData> after = app.getContactHelper ().getContactList();
     Assert.assertEquals (after.size (), before.size () );
 
@@ -50,4 +51,6 @@ public class ContactModificationTests extends TestBase {
 
 
   }
+
+
 }

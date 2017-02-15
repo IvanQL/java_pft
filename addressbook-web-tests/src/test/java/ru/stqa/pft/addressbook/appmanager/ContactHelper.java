@@ -23,6 +23,13 @@ public class ContactHelper extends HelperBase {
     super ( wd );
   }
 
+  public void gotoHomePage() {
+    if (isElementPresent ( By.id ( "maintable" ) )) {
+      return;
+    }
+    click ( By.linkText ( "home" ) );
+  }
+
   public void enterNewContact() {
     click ( By.xpath ( "//div[@id='content']/form/input[21]" ) );
   }
@@ -40,15 +47,22 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void modifyContact(List <ContactData> before, ContactData contact) {
+    initContactModification ( before.size () - 1 );
+    fillContactForm ( contact, false );
+    submitContactModification ();
+    gotoHomePage ();
+  }
+
   public void initContactModification(int index) {
-    wd.findElements ( By.cssSelector ( "img[alt=\"Edit\"]" )).get ( index ).click ();
+    wd.findElements ( By.cssSelector ( "img[alt=\"Edit\"]" ) ).get ( index ).click ();
   }
 
   public void submitContactModification() {
     click ( By.name ( "update" ) );
   }
 
-  public void selectContact(int index ) {
+  public void selectContact(int index) {
     wd.findElements ( By.name ( "selected[]" ) ).get ( index ).click ();
 
   }
@@ -73,19 +87,19 @@ public class ContactHelper extends HelperBase {
   }
 
   public int getContactCount() {
-    return wd.findElements (By.name ( "selected[]" )  ).size ();
+    return wd.findElements ( By.name ( "selected[]" ) ).size ();
 
   }
 
-  public List<ContactData> getContactList() {
-    List <ContactData> contacts = new ArrayList<ContactData> ();
-    List <WebElement> elements = wd.findElements ( By.xpath("//tr[@name='entry']") );
+  public List <ContactData> getContactList() {
+    List <ContactData> contacts = new ArrayList <ContactData> ();
+    List <WebElement> elements = wd.findElements ( By.xpath ( "//tr[@name='entry']" ) );
     for (WebElement element : elements) {
-      String name = element.findElements(By.tagName("td")).get(2).getText();
-      String lastname = element.findElements(By.tagName("td")).get(1).getText();
-      int id =  Integer.parseInt(element.findElement (By.tagName("input")).getAttribute("id"));
-      ContactData contact =  new ContactData (id, name, lastname, null, null, null);
-      contacts.add(contact);
+      String name = element.findElements ( By.tagName ( "td" ) ).get ( 2 ).getText ();
+      String lastname = element.findElements ( By.tagName ( "td" ) ).get ( 1 ).getText ();
+      int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "id" ) );
+      ContactData contact = new ContactData ( id, name, lastname, null, null, null );
+      contacts.add ( contact );
     }
 
     return contacts;
