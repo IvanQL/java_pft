@@ -5,9 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
@@ -23,20 +21,19 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
-    List <ContactData> before = app.contact ().list ();
+    Set<ContactData> before = app.contact ().all ();
     app.goTo ().addContactPage ();
     ContactData contact = new ContactData ()
             .withName ( "ivan" ).withLastname ( "bondar").withTelephone ( "0981234567" ).withEmail ( "test@mail.com" ).withGroup ( "test1" );
     app.contact ().create ( contact, true );
     app.contact ().homePage ();
-    List <ContactData> after = app.contact ().list ();
+    Set <ContactData> after = app.contact ().all ();
     Assert.assertEquals ( after.size (), before.size () + 1 );
 
-    before.add ( contact );
-    Comparator <? super ContactData> byId = Comparator.comparingInt ( ContactData::getId );
-    before.sort ( byId );
-    after.sort ( byId );
 
+    contact.withId ( after.stream ().mapToInt ((g ) -> g.getId ()).max ().getAsInt() );
+    before.add ( contact );
+    Assert.assertEquals ( before, after );
 
   }
 
