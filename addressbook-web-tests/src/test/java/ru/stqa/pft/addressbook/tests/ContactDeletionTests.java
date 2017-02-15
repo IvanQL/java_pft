@@ -22,7 +22,8 @@ public class ContactDeletionTests extends TestBase {
         app.group ().create ( new GroupData ().withName ( "test1" ) );
       }
       app.goTo ().addContactPage ();
-      app.contact ().create ( new ContactData ( "ivan", "bondar", "0981234567", "test@mail.com", "test1" ), true );
+      app.contact ().create ( new ContactData ()
+              .withName ( "ivan" ).withLastname ( "bondar").withTelephone ( "0981234567" ).withEmail ( "test@mail.com" ).withGroup ( "test1" ), true );
       app.contact ().homePage ();
     }
     app.contact ().homePage ();
