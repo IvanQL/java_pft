@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 28.01.2017.
@@ -44,30 +44,33 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void modifyContact(int index, ContactData contact) {
-    initContactModification ( index );
+  public void modify( ContactData contact) {
+    initContactModificationById ( contact.getId () );
     fillContactForm ( contact, false );
     submitContactModification ();
     homePage ();
   }
 
-  public void delete(int index) {
-    selectContact ( index );
+  public void delete(ContactData сontact) {
+    selectContactById ( сontact.getId () );
     deleteSelectedContacts ();
     submitDeletionContacts ();
     homePage ();
   }
 
-  public void initContactModification(int index) {
-    wd.findElements ( By.cssSelector ( "img[alt=\"Edit\"]" ) ).get ( index ).click ();
+
+  public void initContactModificationById(int id) {
+    wd.findElement ( By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
   }
 
   public void submitContactModification() {
     click ( By.name ( "update" ) );
   }
 
-  public void selectContact(int index) {
-    wd.findElements ( By.name ( "selected[]" ) ).get ( index ).click ();
+
+
+  public void selectContactById(int id) {
+    wd.findElement (By.cssSelector ( "input[value='" + id + "']" ) ).click ();
 
   }
 
@@ -95,8 +98,9 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public List <ContactData> list() {
-    List <ContactData> contacts = new ArrayList <> ();
+
+  public Set <ContactData> all() {
+    Set <ContactData> contacts = new HashSet <ContactData> ();
     List <WebElement> elements = wd.findElements ( By.xpath ( "//tr[@name='entry']" ) );
     for (WebElement element : elements) {
       String name = element.findElements ( By.tagName ( "td" ) ).get ( 2 ).getText ();
@@ -107,5 +111,6 @@ public class ContactHelper extends HelperBase {
 
     return contacts;
   }
+
 
 }
