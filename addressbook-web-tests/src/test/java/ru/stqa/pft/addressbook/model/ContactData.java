@@ -4,12 +4,11 @@ public class ContactData {
 
 
   private int id = Integer.MAX_VALUE;
-  private  String name;
-  private  String lastname;
-  private  String telephone;
-  private  String email;
+  private String name;
+  private String lastname;
+  private String telephone;
+  private String email;
   private String group;
-
 
 
   public String getName() {
