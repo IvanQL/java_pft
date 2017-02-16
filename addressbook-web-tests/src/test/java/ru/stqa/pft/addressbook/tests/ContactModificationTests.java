@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -8,7 +9,6 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Administrator on 28.01.2017.
@@ -38,8 +38,8 @@ public class ContactModificationTests extends TestBase {
     ContactData contact = new ContactData ()
             .withId ( modifiedContact.getId () ).withName ( "ivan" ).withLastname ( "bondar" ).withTelephone ( "0981234567" ).withEmail ( "test@mail.com" );
     app.contact ().modify ( contact );
+    assertThat ( app.contact ().count (), Matchers.equalTo ( before.size () ) );
     Contacts after = app.contact ().all ();
-    assertEquals ( after.size (), before.size () );
     assertThat ( after, equalTo ( before.without ( modifiedContact ).withAdded ( contact ) ) );
 
 
