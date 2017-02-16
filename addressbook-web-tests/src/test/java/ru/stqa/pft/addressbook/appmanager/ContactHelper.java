@@ -7,10 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Administrator on 28.01.2017.
@@ -46,10 +43,11 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void modify( ContactData contact) {
+  public void modify(ContactData contact) {
     initContactModificationById ( contact.getId () );
     fillContactForm ( contact, false );
     submitContactModification ();
+    contactCashe = null;
     homePage ();
   }
 
@@ -57,12 +55,13 @@ public class ContactHelper extends HelperBase {
     selectContactById ( сontact.getId () );
     deleteSelectedContacts ();
     submitDeletionContacts ();
+    contactCashe = null;
     homePage ();
   }
 
 
   public void initContactModificationById(int id) {
-    wd.findElement ( By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
+    wd.findElement ( By.xpath ( "//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img" ) ).click ();
   }
 
   public void submitContactModification() {
@@ -70,9 +69,8 @@ public class ContactHelper extends HelperBase {
   }
 
 
-
   public void selectContactById(int id) {
-    wd.findElement (By.cssSelector ( "input[value='" + id + "']" ) ).click ();
+    wd.findElement ( By.cssSelector ( "input[value='" + id + "']" ) ).click ();
 
   }
 
@@ -89,6 +87,7 @@ public class ContactHelper extends HelperBase {
 
     fillContactForm ( (contact), true );
     enterNewContact ();
+    contactCashe = null;
   }
 
   public boolean isThereAContact() {
@@ -100,18 +99,24 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  private Contacts contactCashe = null;
+
 
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCashe != null) {
+      return new Contacts ( contactCashe );
+    }
+
+    contactCashe = new Contacts ();
     List <WebElement> elements = wd.findElements ( By.xpath ( "//tr[@name='entry']" ) );
     for (WebElement element : elements) {
       String name = element.findElements ( By.tagName ( "td" ) ).get ( 2 ).getText ();
       String lastname = element.findElements ( By.tagName ( "td" ) ).get ( 1 ).getText ();
       int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "id" ) );
-      contacts.add ( new ContactData ().withId ( id ).withName ( name ).withLastname ( lastname ) );
+      contactCashe.add ( new ContactData ().withId ( id ).withName ( name ).withLastname ( lastname ) );
     }
 
-    return contacts;
+    return new Contacts ( contactCashe );
   }
 
 
