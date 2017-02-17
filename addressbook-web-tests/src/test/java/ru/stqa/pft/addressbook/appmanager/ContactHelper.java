@@ -8,7 +8,10 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.time.Year;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Administrator on 28.01.2017.
@@ -62,7 +65,7 @@ public class ContactHelper extends HelperBase {
 
 
   public void initContactModificationById(int id) {
-    wd.findElement ( By.xpath ( "//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img" ) ).click ();
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
   public void submitContactModification() {
@@ -115,10 +118,26 @@ public class ContactHelper extends HelperBase {
       String lastname = element.findElements ( By.tagName ( "td" ) ).get ( 1 ).getText ();
       int id = Integer.parseInt ( element.findElement ( By.tagName ( "input" ) ).getAttribute ( "id" ) );
       contactCashe.add ( new ContactData ().withId ( id ).withName ( name ).withLastname ( lastname ) );
+
     }
 
     return new Contacts ( contactCashe );
   }
+
+  public Set<ContactData> all1() {
+    Set<ContactData> contacts = new HashSet<ContactData> ();
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List <WebElement> cells = row.findElements ( By.tagName ( "td" ) );
+      int id = Integer.parseInt ( cells.get ( 0 ).findElement ( By.tagName ( "input" ) ).getAttribute ( "value" ) );
+      String lastname = cells.get ( 1 ).getText ();
+      String name = cells.get ( 2 ).getText ();
+      String[] phones = cells.get ( 5 ).getText ().split ( "\n" );
+      contacts.add ( new ContactData ().withId ( id ).withName ( name ).withLastname ( lastname )
+              .withHomePhone ( phones[0] ).withMobilePhone ( phones[1] ).withWorkPhone ( phones[2] ) );
+    }
+    return contacts;
+    }
 
 
   public ContactData infoFromEditForm(ContactData contact) {
@@ -133,4 +152,6 @@ public class ContactHelper extends HelperBase {
             .withHomePhone (home).withMobilePhone (mobile).withWorkPhone (work);
 
   }
+
+
 }
