@@ -18,6 +18,17 @@ public class ContactData {
   private String email2;
   private String email3;
   private String address;
+  private String fullInfo;
+
+  public String getFullInfo() {
+    return fullInfo;
+  }
+
+  public ContactData withFullInfo(String fullInfo) {
+    this.fullInfo = fullInfo;
+    return this;
+  }
+
 
   public String getAddress() {
     return address;
@@ -27,7 +38,6 @@ public class ContactData {
     this.address = address;
     return this;
   }
-
 
 
   public String getEmail1() {
@@ -58,7 +68,6 @@ public class ContactData {
   }
 
 
-
   public String getAllEmails() {
     return allEmails;
   }
@@ -70,8 +79,6 @@ public class ContactData {
   }
 
 
-
-
   public String getAllPhones() {
     return allPhones;
   }
@@ -80,8 +87,6 @@ public class ContactData {
     this.allPhones = allPhones;
     return this;
   }
-
-
 
 
   public String getHomePhone() {
@@ -95,7 +100,6 @@ public class ContactData {
   public String getWorkPhone() {
     return workPhone;
   }
-
 
 
   public String getName() {
@@ -153,7 +157,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withHomePhone(String homePhone ) {
+  public ContactData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
@@ -163,7 +167,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withWorkPhone(String workPhone ) {
+  public ContactData withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
     return this;
   }
