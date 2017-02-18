@@ -17,18 +17,6 @@ public class ContactData {
   private String email1;
   private String email2;
   private String email3;
-  private String address;
-
-  public String getAddress() {
-    return address;
-  }
-
-  public ContactData withAddress(String address) {
-    this.address = address;
-    return this;
-  }
-
-
 
   public String getEmail1() {
     return email1;
