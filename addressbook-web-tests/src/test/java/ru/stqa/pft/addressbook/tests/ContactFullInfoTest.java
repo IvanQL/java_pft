@@ -37,20 +37,20 @@ public class ContactFullInfoTest extends TestBase {
     ContactData contactInfoFromEditForm = app.contact ().infoFromEditForm ( contact );
     ContactData contactInfoFromFullInfoForm = app.contact ().infoFromFullInfoForm ( contact );
 
-    ContactData newFullInfo = new ContactData().withId(contact.getId()).
-            withFullInfo(mergeNames(contactInfoFromEditForm) + "\n" +
-                    contactInfoFromEditForm.getAddress() + "\n" + "\n" +
-                    mergePhones(contactInfoFromEditForm) + "\n" + "\n" +
-                    mergeEmails(contactInfoFromEditForm));
+    ContactData newFullInfo = new ContactData ().withId ( contact.getId () ).
+            withFullInfo ( mergeNames ( contactInfoFromEditForm ) + "\n" +
+                    contactInfoFromEditForm.getAddress () + "\n" + "\n" +
+                    mergePhones ( contactInfoFromEditForm ) + "\n" + "\n" +
+                    mergeEmails ( contactInfoFromEditForm ) );
 
-    assertThat(contactInfoFromFullInfoForm.getFullInfo(), equalTo(newFullInfo.getFullInfo()));
+    assertThat ( contactInfoFromFullInfoForm.getFullInfo (), equalTo ( newFullInfo.getFullInfo () ) );
   }
 
   private String mergeNames(ContactData contactInfoFromEditForm) {
-    return Arrays.asList(contactInfoFromEditForm.getName(),
-            contactInfoFromEditForm.getLastname ())
-            .stream().filter((s) -> !s.equals(""))
-            .collect(Collectors.joining(" "));
+    return Arrays.asList ( contactInfoFromEditForm.getName (),
+            contactInfoFromEditForm.getLastname () )
+            .stream ().filter ( (s) -> !s.equals ( "" ) )
+            .collect ( Collectors.joining ( " " ) );
   }
 
   private String mergeEmails(ContactData contactInfoFromEditForm) {
@@ -66,16 +66,16 @@ public class ContactFullInfoTest extends TestBase {
   }
 
   private String mergePhones(ContactData contactInfoFromEditForm) {
-    String home = "H: " + cleanedPhone(contactInfoFromEditForm.getHomePhone());
-    String mobile = "M: " + cleanedPhone(contactInfoFromEditForm.getMobilePhone());
-    String work = "W: " + cleanedPhone(contactInfoFromEditForm.getWorkPhone());
-    return Arrays.asList(home, mobile, work)
-            .stream().filter((s) -> !s.equals(""))
-            .collect( Collectors.joining("\n"));
+    String home = "H: " + cleanedPhone ( contactInfoFromEditForm.getHomePhone () );
+    String mobile = "M: " + cleanedPhone ( contactInfoFromEditForm.getMobilePhone () );
+    String work = "W: " + cleanedPhone ( contactInfoFromEditForm.getWorkPhone () );
+    return Arrays.asList ( home, mobile, work )
+            .stream ().filter ( (s) -> !s.equals ( "" ) )
+            .collect ( Collectors.joining ( "\n" ) );
   }
 
   public static String cleanedPhone(String phone) {
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    return phone.replaceAll ( "\\s", "" ).replaceAll ( "[-()]", "" );
 
   }
 
