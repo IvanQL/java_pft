@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: de.weltraumschaf.commons:jcommander:2.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.weltraumschaf.commons/jcommander/2.2.0/cbf85fe3c4b1b73b71c52c1095f4db7d10c73f25/jcommander-2.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.weltraumschaf.commons/jcommander/2.2.0/f486017b1cc8710538f8c1795dd1adaa6edaecbb/jcommander-2.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: de.weltraumschaf.commons:validate:2.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.weltraumschaf.commons/validate/2.2.0/34f98a2e44bb42f5a08982ef5111db470b18da31/validate-2.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.weltraumschaf.commons/validate/2.2.0/a9ae9cc11b19029ac02764591af6046ec83430da/validate-2.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
