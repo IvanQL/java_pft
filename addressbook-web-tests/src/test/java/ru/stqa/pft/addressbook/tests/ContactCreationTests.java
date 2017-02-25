@@ -1,17 +1,43 @@
 package ru.stqa.pft.addressbook.tests;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ContactCreationTests extends TestBase {
+
+
+  @DataProvider
+  public Iterator <Object[]> validContactsFromJson() throws IOException {
+    BufferedReader resder = new BufferedReader ( new FileReader ( new File ( "src/test/resources/contacts.json" ) ) );
+    String json = "";
+    String line = resder.readLine ();
+    while (line != null) {
+      json += line;
+      line = resder.readLine ();
+    }
+    Gson gson = new Gson ();
+    List <ContactData> contacts = gson.fromJson ( json, new TypeToken <List <ContactData>> () {
+    }.getType () );
+    return contacts.stream ().map ( (g) -> new Object[]{g} ).collect ( Collectors.toList () ).iterator ();
+
+  }
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -23,14 +49,12 @@ public class ContactCreationTests extends TestBase {
 
   }
 
-  @Test
-  public void testContactCreation() {
+  @Test(dataProvider = "validContactsFromJson")
+  public void testContactCreation(ContactData contact) {
     Contacts before = (Contacts) app.contact ().all ();
     app.goTo ().addContactPage ();
-    File photo = new File ( "src/test/resources/stru.png" );
-    ContactData contact = new ContactData ()
-            .withName ( "ivan" ).withLastname ( "bondar" ).withTelephone ( "0981234567" ).withEmail ( "test@mail.com" )
-            .withAddress ( "address q" ).withPhoto ( photo );
+    //File photo = new File ( "src/test/resources/stru.png" );
+
     app.contact ().create ( contact, true );
     app.contact ().homePage ();
     assertThat ( app.contact ().count (), equalTo ( before.size () + 1 ) );

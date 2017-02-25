@@ -6,7 +6,6 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,18 +20,18 @@ import java.util.List;
 public class ContactDataGenerator {
 
 
-  @Parameter(names ="-c", description = "Contact count")
+  @Parameter(names = "-c", description = "Contact count")
   public int count;
 
-  @Parameter(names ="-f", description = "Target file")
+  @Parameter(names = "-f", description = "Target file")
   public String file;
 
-  @Parameter(names ="-d", description = "Data format")
+  @Parameter(names = "-d", description = "Data format")
   public String format;
 
   public static void main(String[] args) throws IOException {
 
-    ContactDataGenerator generator = new ContactDataGenerator();
+    ContactDataGenerator generator = new ContactDataGenerator ();
     JCommander jCommander = new JCommander ( generator );
     try {
       jCommander.parse ( args );
@@ -40,34 +39,36 @@ public class ContactDataGenerator {
       jCommander.usage ();
       return;
     }
-    generator.run();
+    generator.run ();
 
 
   }
 
   private void run() throws IOException {
-    List<ContactData> contacts = generateContacts ( count );
-    if (format.equals ( "json" ))  {
+    List <ContactData> contacts = generateContacts ( count );
+    if (format.equals ( "json" )) {
       saveAsJson ( contacts, new File ( file ) );
     } else {
-      System.out.println ("Unrecognized format " + format);
+      System.out.println ( "Unrecognized format " + format );
 
+    }
   }
-  }
+
   private void saveAsJson(List <ContactData> contacts, File file) throws IOException {
-    Gson gson = new GsonBuilder ().setPrettyPrinting ().excludeFieldsWithoutExposeAnnotation().create ();
-    String json = gson.toJson(contacts);
+    Gson gson = new GsonBuilder ().setPrettyPrinting ().excludeFieldsWithoutExposeAnnotation ().create ();
+    String json = gson.toJson ( contacts );
     Writer writer = new FileWriter ( file );
-    writer.write (  json);
+    writer.write ( json );
     writer.close ();
   }
 
-  private  List <ContactData> generateContacts(int count) {
-    List <ContactData> contacts = new ArrayList<ContactData> ();
+  private List <ContactData> generateContacts(int count) {
+    List <ContactData> contacts = new ArrayList <ContactData> ();
+    //File photo = new File ( "src/test/resources/stru.png" );
     for (int i = 0; i < count; i++) {
       contacts.add ( new ContactData ().withName ( String.format ( "ivan %s", i ) )
               .withLastname ( String.format ( "bondar %s", i ) ).withTelephone ( String.format ( "0981234567 %s", i ) )
-              .withEmail ( String.format ( "test@mail.com %s", i ) ).withAddress ( String.format ( "address q %s", i ) ));
+              .withEmail ( String.format ( "test@mail.com %s", i ) ).withAddress ( String.format ( "address q %s", i ) ) );
 
 
     }
