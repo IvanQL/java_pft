@@ -25,12 +25,12 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator <Object[]> validContactsFromJson() throws IOException {
-    BufferedReader resder = new BufferedReader ( new FileReader ( new File ( "src/test/resources/contacts.json" ) ) );
+    BufferedReader reader = new BufferedReader ( new FileReader ( new File ( "src/test/resources/contacts.json" ) ) );
     String json = "";
-    String line = resder.readLine ();
+    String line = reader.readLine ();
     while (line != null) {
       json += line;
-      line = resder.readLine ();
+      line = reader.readLine ();
     }
     Gson gson = new Gson ();
     List <ContactData> contacts = gson.fromJson ( json, new TypeToken <List <ContactData>> () {

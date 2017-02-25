@@ -24,12 +24,12 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator <Object[]> validGroupsFromXml() throws IOException {
-    BufferedReader resder = new BufferedReader ( new FileReader ( new File ( "src/test/resources/groups.xml" ) ) );
+    BufferedReader reader = new BufferedReader ( new FileReader ( new File ( "src/test/resources/groups.xml" ) ) );
     String xml = "";
-    String line = resder.readLine ();
+    String line = reader.readLine ();
     while (line != null) {
       xml += line;
-      line = resder.readLine ();
+      line = reader.readLine ();
     }
     XStream xstream = new XStream ();
     xstream.processAnnotations ( GroupData.class );
