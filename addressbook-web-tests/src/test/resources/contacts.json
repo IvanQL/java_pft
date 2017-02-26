@@ -5,19 +5,5 @@
     "telephone": "telephone 0",
     "email": "email 0",
     "address": "address  0"
-  },
-  {
-    "name": "name 1",
-    "lastname": "lastname 1",
-    "telephone": "telephone 1",
-    "email": "email 1",
-    "address": "address  1"
-  },
-  {
-    "name": "name 2",
-    "lastname": "lastname 2",
-    "telephone": "telephone 2",
-    "email": "email 2",
-    "address": "address  2"
   }
 ]
