@@ -26,6 +26,7 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
+}
 
     task testContacts(type: Test) {
         useTestNG {
@@ -39,4 +40,5 @@ task testGroups(type: Test) {
         }
 
     }
-}
+
+
