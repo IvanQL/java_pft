@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -19,11 +20,12 @@ public class ContactFullInfoTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.contact ().homePage ();
+    File photo = new File ( "src/test/resources/stru.png" );
     if (app.contact ().all ().size () == 0) {
       app.goTo ().addContactPage ();
       app.contact ().create ( new ContactData ()
               .withName ( "ivan" ).withLastname ( "bondar" ).withHomePhone ( "0981234567" )
-              .withAddress ( "address q" ).withEmail ( "12345" ).withWorkPhone ( "2323" ).withMobilePhone ( "ewrwr" ), true );
+              .withAddress ( "address q" ).withEmail ( "12345" ).withWorkPhone ( "2323" ).withMobilePhone ( "ewrwr" ).withPhoto ( photo ), true );
       app.contact ().homePage ();
     }
 
@@ -38,7 +40,7 @@ public class ContactFullInfoTest extends TestBase {
     ContactData contactInfoFromFullInfoForm = app.contact ().infoFromFullInfoForm ( contact );
 
     ContactData newFullInfo = new ContactData ().withId ( contact.getId () ).
-            withFullInfo ( mergeNames ( contactInfoFromEditForm ) + "\n" +
+            withFullInfo ( mergeNames ( contactInfoFromEditForm ) + "\n" + "\n" +
                     contactInfoFromEditForm.getAddress () + "\n" + "\n" +
                     mergePhones ( contactInfoFromEditForm ) + "\n" + "\n" +
                     mergeEmails ( contactInfoFromEditForm ) );
@@ -65,17 +67,29 @@ public class ContactFullInfoTest extends TestBase {
     return email.replaceAll ( " ", "" );
   }
 
-  private String mergePhones(ContactData contactInfoFromEditForm) {
-    String home = "H: " + cleanedPhone ( contactInfoFromEditForm.getHomePhone () );
-    String mobile = "M: " + cleanedPhone ( contactInfoFromEditForm.getMobilePhone () );
-    String work = "W: " + cleanedPhone ( contactInfoFromEditForm.getWorkPhone () );
+  public String mergePhones(ContactData contactInfoFromEditForm) {
+    String home = "";
+    if ((!contactInfoFromEditForm.getHomePhone  ().equals(""))) {
+      home = "H: " + cleanedPhone ( contactInfoFromEditForm.getHomePhone () );
+    }
+    String mobile = "";
+     if ((!contactInfoFromEditForm.getMobilePhone ().equals (""))) {
+       mobile = "M: " + cleanedPhone ( contactInfoFromEditForm.getMobilePhone () );
+
+    }
+    String work = "";
+
+    if ((!contactInfoFromEditForm.getWorkPhone ().equals (""))) {
+      work = "W: " + cleanedPhone ( contactInfoFromEditForm.getWorkPhone () );
+    }
+
     return Arrays.asList ( home, mobile, work )
             .stream ().filter ( (s) -> !s.equals ( "" ) )
             .collect ( Collectors.joining ( "\n" ) );
   }
 
   public static String cleanedPhone(String phone) {
-    return phone.replaceAll ( "\\s", "" ).replaceAll ( "[-()]", "" );
+    return phone.replaceAll ( "\\s", "" ).replaceAll ( "[-()]", "" ).replaceAll("\\s", "") ;
 
   }
 
