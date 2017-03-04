@@ -56,7 +56,7 @@ public class ContactFullInfoTest extends TestBase {
   }
 
   private String mergeEmails(ContactData contactInfoFromEditForm) {
-    return Arrays.asList ( contactInfoFromEditForm.getEmail1 (), contactInfoFromEditForm.getEmail2 (), contactInfoFromEditForm.getEmail3 () )
+    return Arrays.asList ( contactInfoFromEditForm.getEmail (), contactInfoFromEditForm.getEmail2 (), contactInfoFromEditForm.getEmail3 () )
             .stream ().filter ( (s) -> !s.equals ( "" ) )
             .map ( ContactFullInfoTest::cleaned )
             .collect ( Collectors.joining ( "\n" ) );

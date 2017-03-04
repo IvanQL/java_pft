@@ -1,41 +1,83 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
-
+@Entity
+@Table (name = "addressbook")
 public class ContactData {
 
-
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String name;
-  @Expose
+
+
+  @Column(name = "lastname")
   private String lastname;
+
   @Expose
+  @Transient
   private String telephone;
+
   @Expose
+  @Transient
+  @Column(name = "email")
+  @Type ( type = "text")
   private String email;
+
+  @Transient
   private String group;
+
+  @Column(name = "home")
+  @Type( type = "text")
   private String homePhone;
+
+  @Column(name = "mobile")
+  @Type ( type = "text")
   private String mobilePhone;
+
+  @Column(name = "work")
+  @Type ( type = "text")
   private String workPhone;
+
+  @Transient
   private String allPhones;
+
+  @Transient
   private String allEmails;
-  private String email1;
+
+  @Column(name = "email2")
+  @Type ( type = "text")
   private String email2;
+
+  @Column(name = "email3")
+  @Type ( type = "text")
   private String email3;
+
   @Expose
+  @Column(name = "address")
+  @Type ( type = "text")
   private String address;
+
+  @Transient
   private String fullInfo;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type ( type = "text")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File ( photo );
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath ();
     return this;
   }
 
@@ -58,15 +100,6 @@ public class ContactData {
     return this;
   }
 
-
-  public String getEmail1() {
-    return email1;
-  }
-
-  public ContactData withEmail1(String email1) {
-    this.email1 = email1;
-    return this;
-  }
 
   public String getEmail2() {
     return email2;

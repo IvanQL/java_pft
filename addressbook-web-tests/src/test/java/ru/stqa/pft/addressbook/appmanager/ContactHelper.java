@@ -158,14 +158,14 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement ( By.name ( "home" ) ).getAttribute ( "value" );
     String mobile = wd.findElement ( By.name ( "mobile" ) ).getAttribute ( "value" );
     String work = wd.findElement ( By.name ( "work" ) ).getAttribute ( "value" );
-    String email1 = wd.findElement ( By.name ( "email" ) ).getAttribute ( "value" );
+    String email = wd.findElement ( By.name ( "email" ) ).getAttribute ( "value" );
     String email2 = wd.findElement ( By.name ( "email2" ) ).getAttribute ( "value" );
     String email3 = wd.findElement ( By.name ( "email3" ) ).getAttribute ( "value" );
     String address = wd.findElement ( By.name ( "address" ) ).getAttribute ( "value" );
     wd.navigate ().back ();
     return new ContactData ().withId ( contact.getId () ).withName ( name ).withLastname ( lastname )
             .withHomePhone ( home ).withMobilePhone ( mobile )
-            .withWorkPhone ( work ).withEmail1 ( email1 ).withEmail2 ( email2 ).withEmail3 ( email3 ).withAddress ( address );
+            .withWorkPhone ( work ).withEmail ( email ).withEmail2 ( email2 ).withEmail3 ( email3 ).withAddress ( address );
 
   }
 
