@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @XStreamAlias("group")
 @Entity
@@ -33,6 +34,7 @@ public class GroupData {
   @Column (name = "group_footer")
   @Type ( type = "text")
   private String footer;
+
 
 
   public GroupData withId(int id) {
