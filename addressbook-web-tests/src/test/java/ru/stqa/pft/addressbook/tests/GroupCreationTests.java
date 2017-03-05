@@ -89,6 +89,8 @@ public class GroupCreationTests extends TestBase {
 
     assertThat ( after, equalTo ( before ) );
 
+    verifyGroupListInUi ();
+
   }
 
 }
