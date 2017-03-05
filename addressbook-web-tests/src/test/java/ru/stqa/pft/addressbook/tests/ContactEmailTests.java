@@ -19,15 +19,18 @@ public class ContactEmailTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.contact ().homePage ();
-    if (app.contact ().all ().size () == 0) {
+    if (app.db ().contacts().size () ==0) {
       app.goTo ().groupPage ();
-      if (app.group ().all ().size () == 0) {
+      if (app.db ().groups ().size () ==0) {
         app.group ().create ( new GroupData ().withName ( "test1" ) );
       }
       app.goTo ().addContactPage ();
       app.contact ().create ( new ContactData ()
-              .withName ( "ivan" ).withLastname ( "bondar" ).withTelephone ( "0981234567" ).withEmail ( "test@mail.com" ).withGroup ( "test1" ), true );
+              .withName ( String.format ( "name " ) )
+              .withLastname ( String.format ( "lastname ") ).withHomePhone ( String.format ( "12345") )
+              .withWorkPhone (String.format ( "12345")).withMobilePhone ( String.format ( "12345" ) )
+              .withEmail ( String.format ( "email") ).withEmail2 (String.format ( "email2")  )
+              .withEmail3 ( String.format ( "email3" ) ).withAddress ( String.format ( "address" )  ), true );
       app.contact ().homePage ();
     }
     app.contact ().homePage ();

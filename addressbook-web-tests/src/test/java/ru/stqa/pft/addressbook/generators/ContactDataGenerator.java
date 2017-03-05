@@ -65,11 +65,12 @@ public class ContactDataGenerator {
 
   private List <ContactData> generateContacts(int count) {
     List <ContactData> contacts = new ArrayList <ContactData> ();
-    //File photo = new File ( "src/test/resources/stru.png" );
     for (int i = 0; i < count; i++) {
       contacts.add ( new ContactData ().withName ( String.format ( "name %s", i ) )
               .withLastname ( String.format ( "lastname %s", i ) ).withHomePhone ( String.format ( "12345%s", i ) )
-              .withEmail ( String.format ( "email%s", i ) ).withAddress ( String.format ( "address%s", i ) ) );
+              .withWorkPhone (String.format ( "12345%s", i )).withMobilePhone ( String.format ( "12345%s", i ) )
+              .withEmail ( String.format ( "email%s", i ) ).withEmail2 (String.format ( "email2%s", i )  )
+              .withEmail3 ( String.format ( "email3%s", i ) ).withAddress ( String.format ( "address%s", i ) ) );
 
 
     }

@@ -2,8 +2,12 @@
   {
     "name": "name 0",
     "lastname": "lastname 0",
-    "telephone": "123450",
     "email": "email0",
+    "homePhone": "123450",
+    "mobilePhone": "123450",
+    "workPhone": "123450",
+    "email2": "email20",
+    "email3": "email30",
     "address": "address0"
   }
 ]

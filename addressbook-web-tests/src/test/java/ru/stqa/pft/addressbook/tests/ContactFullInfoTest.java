@@ -40,7 +40,7 @@ public class ContactFullInfoTest extends TestBase {
     ContactData contactInfoFromFullInfoForm = app.contact ().infoFromFullInfoForm ( contact );
 
     ContactData newFullInfo = new ContactData ().withId ( contact.getId () ).
-            withFullInfo ( mergeNames ( contactInfoFromEditForm ) + "\n" + "\n" +
+            withFullInfo ( mergeNames ( contactInfoFromEditForm ) + "\n" +
                     contactInfoFromEditForm.getAddress () + "\n" + "\n" +
                     mergePhones ( contactInfoFromEditForm ) + "\n" + "\n" +
                     mergeEmails ( contactInfoFromEditForm ) );

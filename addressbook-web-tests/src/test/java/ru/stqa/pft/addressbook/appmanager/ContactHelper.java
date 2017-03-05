@@ -36,6 +36,8 @@ public class ContactHelper extends HelperBase {
     type ( By.name ( "lastname" ), contactData.getLastname () );
     type ( By.name ( "home" ), contactData.getTelephone () );
     type ( By.name ( "email" ), contactData.getEmail () );
+    type ( By.name ( "email2" ), contactData.getEmail2 () );
+    type ( By.name ( "email3" ), contactData.getEmail3 () );
     type ( By.name ( "address" ), contactData.getAddress () );
     type ( By.name ( "work" ), contactData.getWorkPhone () );
     type ( By.name ( "home" ), contactData.getHomePhone () );
@@ -69,7 +71,13 @@ public class ContactHelper extends HelperBase {
 
 
   public void initContactModificationById(int id) {
-    wd.findElement ( By.cssSelector ( String.format ( "a[href='edit.php?id=%s']", id ) ) ).click ();
+
+    //wd.findElement ( By.cssSelector ( String.format ( "a[href='edit.php?id=%s']", id ) ) ).click ();
+    //wd.findElement (By.xpath (String.format ("//input[value='%s']/../../td[8]/a",id))).click();
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List <WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(7).findElement(By.tagName("a")).click();
   }
 
   public void submitContactModification() {
