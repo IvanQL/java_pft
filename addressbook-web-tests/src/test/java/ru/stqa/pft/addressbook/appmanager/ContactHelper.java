@@ -201,4 +201,13 @@ public class ContactHelper extends HelperBase {
     click(By.name("add"));
   }
 
+  public void filterGroupsById(int id) {
+    click( By.cssSelector("#right"));
+    click(By.cssSelector("#right>select>option[value='" + id + "']"));
+  }
+
+  public void removeFromGroup() {
+    click(By.cssSelector("input[name='remove']"));
+  }
+
 }
