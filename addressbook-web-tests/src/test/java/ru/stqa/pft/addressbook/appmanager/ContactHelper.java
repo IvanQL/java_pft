@@ -191,4 +191,14 @@ public class ContactHelper extends HelperBase {
     return new ContactData ().withId ( contact.getId () ).withFullInfo ( allInfo );
   }
 
+  public void selectJoinContactById(int id) {
+
+    wd.findElement(By.cssSelector("input[id ='" + id + "']")).click();
+  }
+  public void addingInGroupById(int id) {
+    click(By.cssSelector("select[name='to_group']"));
+    click(By.cssSelector(".right>select>option[value='" + id + "']"));
+    click(By.name("add"));
+  }
+
 }
