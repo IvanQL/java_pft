@@ -30,19 +30,20 @@ public class ChangePasswordTests extends TestBase {
 
     chooseUser ();
 
-
     app.changePassword ().login ();
     app.changePassword ().resetPassword ( chooseUser () );
-    String email = String.format ( "user%s@localhost.localdomain", 1 );
     List <MailMessage> mailMessages = app.mail ().waitForMail ( 1, 10000 );
-    String confirmationLink = findConfirmationLink ( mailMessages, email );
+    String confirmationLink = findConfirmationLink (mailMessages);
+    String name = chooseUser().iterator().next().getName ();
     app.changePassword ().finish ( confirmationLink, "password" );
-    assertTrue ( app.newSession ().login ( "user1", "password" ) );
+    assertTrue ( app.newSession ().login ( name, "password" ) );
 
   }
 
 
+
   private Users chooseUser() {
+
     Connection conn = null;
 
     try {
@@ -68,8 +69,10 @@ public class ChangePasswordTests extends TestBase {
     return null;
   }
 
-  private String findConfirmationLink(List <MailMessage> mailMessages, String email) {
-    MailMessage mailMessage = mailMessages.stream ().filter ( (m) -> m.to.equals ( email ) ).findFirst ().get ();
+
+
+  private String findConfirmationLink(List <MailMessage> mailMessages) {
+    MailMessage mailMessage = mailMessages.stream ().findFirst ().get ();
     VerbalExpression regex = VerbalExpression.regex ().find ( "http://" ).nonSpace ().oneOrMore ().build ();
     regex.getText ( mailMessage.text );
     return regex.getText ( mailMessage.text );

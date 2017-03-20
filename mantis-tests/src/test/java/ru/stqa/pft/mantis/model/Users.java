@@ -13,6 +13,8 @@ public class Users extends ForwardingSet <UserData> {
 
   private Set<UserData> delegate;
   private String id;
+  private String name;
+  private String email;
 
   public Users(Users users) {
     this.delegate = new HashSet<UserData> ( users.delegate );
@@ -22,10 +24,6 @@ public class Users extends ForwardingSet <UserData> {
     this.delegate = new HashSet <UserData> ();
   }
 
-  public Users(Collection<UserData> contacts) {
-    this.delegate = new HashSet <UserData> (contacts);
-
-  }
 
   @Override
   protected Set <UserData> delegate() {
@@ -35,5 +33,13 @@ public class Users extends ForwardingSet <UserData> {
 
   public String getId() {
     return id;
+  }
+
+  public String getName() {
+     return name;
+  }
+
+  public String getEmail() {
+    return email;
   }
 }
