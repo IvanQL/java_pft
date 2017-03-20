@@ -12,8 +12,6 @@ import ru.stqa.pft.mantis.model.MailMessage;
 import java.io.IOException;
 import java.util.List;
 
-import static org.testng.AssertJUnit.assertTrue;
-
 /**
  * Created by Administrator on 10.03.2017.
  */
