@@ -1,4 +1,4 @@
-package ru.stqa.pft.mail.tests;
+package ru.stqa.pft.mail.tests.model;
 
 public class MailData {
   private final String to;
