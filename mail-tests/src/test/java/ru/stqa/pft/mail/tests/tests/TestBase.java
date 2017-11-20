@@ -1,8 +1,8 @@
 package ru.stqa.pft.mail.tests.tests;
 
-        import org.testng.annotations.AfterMethod;
-        import org.testng.annotations.BeforeMethod;
-        import ru.stqa.pft.mail.tests.appmanager.ApplicationManager;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import ru.stqa.pft.mail.tests.appmanager.ApplicationManager;
 
 
 /**
@@ -27,8 +27,7 @@ public class TestBase {
   }
 
 
-  //protected static final ApplicationManager app
-         // = new ApplicationManager ( System.getProperty ( "browser", BrowserType.CHROME ));
+
 
 
 }

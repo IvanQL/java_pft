@@ -14,25 +14,24 @@ public class ApplicationManager {
 
   private SessionHelper sessionHelper;
 
-  private  MailHelper mailHelper;
+  private MailHelper mailHelper;
 
   public void init() {
     wd = new ChromeDriver ();
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    sessionHelper = new SessionHelper (wd);
-    mailHelper = new MailHelper (wd);
-    wd.get("http://www.i.ua/");
+    wd.manage ().timeouts ().implicitlyWait ( 60, TimeUnit.SECONDS );
+    sessionHelper = new SessionHelper ( wd );
+    mailHelper = new MailHelper ( wd );
+    wd.get ( "http://www.i.ua/" );
     sessionHelper.login ( "for-tests", "21107abc" );
   }
 
 
-
   public void GoToSentPage() {
-      wd.findElement( By.xpath("//div[3]/div[3]/div[3]/div[2]/div[1]/div[3]/form/p/input")).click();
+    wd.findElement ( By.xpath ( "//div[3]/div[3]/div[3]/div[2]/div[1]/div[3]/form/p/input" ) ).click ();  // в идеале нужно вынести в помошник NavigationHelper
   }
 
   public void stop() {
-    wd.quit();
+    wd.quit ();
   }
 
   public MailHelper getMailHelper() {
